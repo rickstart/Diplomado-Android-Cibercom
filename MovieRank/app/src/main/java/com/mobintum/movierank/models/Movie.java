@@ -1,5 +1,10 @@
 package com.mobintum.movierank.models;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by Rick on 18/05/15.
  */
@@ -78,4 +83,26 @@ public class Movie {
     public void setCasting(Cast[] casting) {
         this.casting = casting;
     }
+
+    public static ArrayList<Movie> parseJSON(String response){
+
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+
+        try {
+            JSONObject responseJSON = new JSONObject(response);
+            JSONArray moviesJSON = responseJSON.getJSONArray("movies");
+            for(int i=0; i<moviesJSON.length();i++){
+                JSONObject movie = moviesJSON.getJSONObject(i);
+
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return movies;
+
+    }
+
 }
