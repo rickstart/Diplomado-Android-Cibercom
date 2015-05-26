@@ -100,9 +100,19 @@ public class Movie {
                 JSONObject raitingJSON = movie.getJSONObject("ratings");
                 Raiting raiting = new Raiting(raitingJSON.optInt("critics_score"),raitingJSON.optInt("audience_score"));
 
-                String synopsis;
-                String posterUrl;
-                Cast[] casting;
+                String synopsis = movie.optString("synopsis");
+
+                JSONObject posters = movie.getJSONObject("posters");
+                String posterUrl= posters.optString("thumbnail");
+
+                JSONArray castingArray = movie.getJSONArray("abridged_cast");
+                Cast[] casting = new Cast[]{};
+
+                for(int j=0; j<castingArray.length();j++){
+                    JSONObject castJSON = castingArray.getJSONObject(j);
+                    Cast cast = new Cast(castJSON.optString("name"));
+                    casting[i] = cast;
+                }
             }
 
 
