@@ -98,7 +98,8 @@ public class Movie {
                 String runtime = movie.optString("runtime");
 
                 JSONObject raitingJSON = movie.getJSONObject("ratings");
-                Raiting raiting;
+                Raiting raiting = new Raiting(raitingJSON.optInt("critics_score"),raitingJSON.optInt("audience_score"));
+
                 String synopsis;
                 String posterUrl;
                 Cast[] casting;
