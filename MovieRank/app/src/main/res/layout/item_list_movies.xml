@@ -19,6 +19,7 @@
         android:textSize="@dimen/font_medium"
         android:paddingLeft="@dimen/padding_small"
         android:layout_gravity="center"
-        android:text="@string/hello_blank_fragment"/>
+        android:text="@string/hello_blank_fragment"
+        android:id="@+id/txtTitle"/>
 
 </LinearLayout>
