@@ -93,7 +93,15 @@ public class Movie {
             JSONArray moviesJSON = responseJSON.getJSONArray("movies");
             for(int i=0; i<moviesJSON.length();i++){
                 JSONObject movie = moviesJSON.getJSONObject(i);
+                String title = movie.optString("title");
+                int year = movie.optInt("year");
+                String runtime = movie.optString("runtime");
 
+                JSONObject raitingJSON = movie.getJSONObject("ratings");
+                Raiting raiting;
+                String synopsis;
+                String posterUrl;
+                Cast[] casting;
             }
 
 
