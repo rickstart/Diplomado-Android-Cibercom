@@ -115,6 +115,7 @@ public class Movie {
                 }
 
                 Movie movie = new Movie(title,year,runtime,raiting,synopsis,posterUrl,casting);
+                movies.add(movie);
             }
 
 

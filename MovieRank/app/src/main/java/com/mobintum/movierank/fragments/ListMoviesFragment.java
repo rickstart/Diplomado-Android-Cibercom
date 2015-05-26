@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.mobintum.movierank.R;
 import com.mobintum.movierank.models.Movie;
@@ -21,12 +22,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 
 public class ListMoviesFragment extends Fragment {
 
     public static final String API_KEY = "35hg37n2zaybbwf7wncj9vgw";
     private String query ="friends";
+    private ArrayList<Movie> movies = new ArrayList<Movie>();
 
     private OnFragmentInteractionListener mListener;
 
@@ -55,9 +58,12 @@ public class ListMoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_list_movies, container, false);
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_movies, container, false);
+        ListView listMovies = (ListView) view.findViewById(R.id.listMovies);
+
+
+        return view;
     }
 
 
@@ -125,6 +131,7 @@ public class ListMoviesFragment extends Fragment {
             super.onPostExecute(result);
             if(result!=null)
                 Log.e("RESPONSE",result);
+                movies = Movie.parseJSON(result);
 
         }
 
