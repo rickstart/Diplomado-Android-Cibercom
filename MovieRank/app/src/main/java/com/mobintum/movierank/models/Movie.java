@@ -92,20 +92,20 @@ public class Movie {
             JSONObject responseJSON = new JSONObject(response);
             JSONArray moviesJSON = responseJSON.getJSONArray("movies");
             for(int i=0; i<moviesJSON.length();i++){
-                JSONObject movie = moviesJSON.getJSONObject(i);
-                String title = movie.optString("title");
-                int year = movie.optInt("year");
-                String runtime = movie.optString("runtime");
+                JSONObject movieJSON = moviesJSON.getJSONObject(i);
+                String title = movieJSON.optString("title");
+                int year = movieJSON.optInt("year");
+                String runtime = movieJSON.optString("runtime");
 
-                JSONObject raitingJSON = movie.getJSONObject("ratings");
+                JSONObject raitingJSON = movieJSON.getJSONObject("ratings");
                 Raiting raiting = new Raiting(raitingJSON.optInt("critics_score"),raitingJSON.optInt("audience_score"));
 
-                String synopsis = movie.optString("synopsis");
+                String synopsis = movieJSON.optString("synopsis");
 
-                JSONObject posters = movie.getJSONObject("posters");
+                JSONObject posters = movieJSON.getJSONObject("posters");
                 String posterUrl= posters.optString("thumbnail");
 
-                JSONArray castingArray = movie.getJSONArray("abridged_cast");
+                JSONArray castingArray = movieJSON.getJSONArray("abridged_cast");
                 Cast[] casting = new Cast[]{};
 
                 for(int j=0; j<castingArray.length();j++){
@@ -113,6 +113,8 @@ public class Movie {
                     Cast cast = new Cast(castJSON.optString("name"));
                     casting[i] = cast;
                 }
+
+                Movie movie = new Movie(title,year,runtime,raiting,synopsis,posterUrl,casting);
             }
 
 
