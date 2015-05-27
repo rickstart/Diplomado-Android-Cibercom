@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.mobintum.movierank.R;
+import com.mobintum.movierank.adapters.ListMovieAdapter;
 import com.mobintum.movierank.models.Movie;
 
 import org.apache.http.HttpResponse;
@@ -30,7 +32,7 @@ public class ListMoviesFragment extends Fragment {
     public static final String API_KEY = "35hg37n2zaybbwf7wncj9vgw";
     private String query ="friends";
     private ArrayList<Movie> movies = new ArrayList<Movie>();
-
+    private ListMovieAdapter adapter;
     private OnFragmentInteractionListener mListener;
 
     Uri.Builder builder = new Uri.Builder();
@@ -61,6 +63,15 @@ public class ListMoviesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list_movies, container, false);
 
         ListView listMovies = (ListView) view.findViewById(R.id.listMovies);
+        adapter = new ListMovieAdapter(getActivity(),R.layout.item_list_movies,movies);
+        listMovies.setAdapter(adapter);
+
+        listMovies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mListener.onMovieSelected(movies.get(position));
+            }
+        });
 
 
         return view;
@@ -132,6 +143,9 @@ public class ListMoviesFragment extends Fragment {
             if(result!=null)
                 Log.e("RESPONSE",result);
                 movies = Movie.parseJSON(result);
+                adapter.clear();
+                adapter.addAll(movies);
+                adapter.notifyDataSetChanged();
 
         }
 
