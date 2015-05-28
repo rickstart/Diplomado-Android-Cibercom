@@ -19,4 +19,6 @@
     <string name="runtime">Duración</string>
     <string name="casting">Actores</string>
     <string name="synopsis">Sinopsis</string>
+    <string name="criticScore">Calificación Criticos</string>
+    <string name="audienceScore">Calificación Audiencia</string>
 </resources>

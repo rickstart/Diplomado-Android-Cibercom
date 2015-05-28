@@ -64,6 +64,31 @@
             android:gravity="center"
             android:paddingBottom="@dimen/padding_medium"
             android:id="@+id/txtSynopsis"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/criticScore"
+            android:textSize="@dimen/font_title"
+            android:gravity="center"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_gravity="center"
+            android:id="@+id/ratingCritic"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/audienceScore"
+            android:textSize="@dimen/font_title"
+            android:gravity="center"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_gravity="center"
+            android:id="@+id/ratingAudience"/>
 
     </LinearLayout>
 
