@@ -17,4 +17,6 @@
     <string name="search">Buscar</string>
     <string name="loading">Cargando..</string>
     <string name="runtime">Duración</string>
+    <string name="casting">Actores</string>
+    <string name="synopsis">Sinopsis</string>
 </resources>

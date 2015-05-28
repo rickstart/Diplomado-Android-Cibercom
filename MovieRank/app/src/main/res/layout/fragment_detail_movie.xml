@@ -36,6 +36,34 @@
             android:gravity="center"
             android:paddingBottom="@dimen/padding_medium"
             android:id="@+id/txtRuntime"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/casting"
+            android:textSize="@dimen/font_title"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            android:textSize="@dimen/font_medium"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_medium"
+            android:id="@+id/txtCasting"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/synopsis"
+            android:textSize="@dimen/font_title"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            android:textSize="@dimen/font_medium"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_medium"
+            android:id="@+id/txtSynopsis"/>
 
     </LinearLayout>
 
