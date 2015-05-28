@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -39,8 +40,9 @@ public class ListMoviesFragment extends Fragment {
     private ListMovieAdapter adapter;
     private OnFragmentInteractionListener mListener;
     private final String URL= "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey="+API_KEY+"&q=";
+    private MenuItem menuLoading;
+    private boolean loading = false;
 
-    String url;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +93,7 @@ public class ListMoviesFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_list_movies,menu);
+        this.menuLoading = menu.findItem(R.id.menuLoading);
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.menuSearch).getActionView();
         SearchableInfo searchableInfo = searchManager.getSearchableInfo(getActivity().getComponentName());
@@ -98,14 +101,20 @@ public class ListMoviesFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-
-                new RottenRequest().execute(URL+query);
-
+                if(!query.equals("") && !loading) {
+                    query = query.trim().replaceAll(" +", "%20");
+                    new RottenRequest().execute(URL + query);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
+                if(!newText.equals("") && !loading) {
+                    newText = newText.trim().replaceAll(" +", "%20");
+                    new RottenRequest().execute(URL + newText);
+                }
                 return false;
             }
         });
@@ -117,12 +126,25 @@ public class ListMoviesFragment extends Fragment {
         public void onMovieSelected(Movie movie);
     }
 
+    public void setMenuLoading(boolean load){
+        this.loading = load;
+        if(load){
+            menuLoading.setVisible(true);
+            menuLoading.setActionView(R.layout.menu_loading);
+        }else{
+            menuLoading.setVisible(false);
+        }
+
+    }
+
     public class RottenRequest extends AsyncTask<String,Void,String>{
 
 
         @Override
         protected void onPreExecute() {
+
             super.onPreExecute();
+            setMenuLoading(true);
         }
 
         @Override
@@ -155,12 +177,14 @@ public class ListMoviesFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if(result!=null)
-                Log.e("RESPONSE",result);
+            if(result!=null) {
+                Log.e("RESPONSE", result);
                 movies = Movie.parseJSON(result);
                 adapter.clear();
                 adapter.addAll(movies);
                 adapter.notifyDataSetChanged();
+                setMenuLoading(false);
+            }
 
         }
 
