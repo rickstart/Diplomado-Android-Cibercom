@@ -3,12 +3,13 @@ package com.mobintum.movierank.models;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Rick on 18/05/15.
  */
-public class Movie {
+public class Movie implements Serializable {
 
     private String title;
     private int year;
