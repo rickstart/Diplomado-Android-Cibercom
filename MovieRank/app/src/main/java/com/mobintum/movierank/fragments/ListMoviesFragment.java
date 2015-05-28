@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -100,7 +99,7 @@ public class ListMoviesFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
 
 
-                new RottenRequest().execute(URLX+query);
+                new RottenRequest().execute(URL+query);
 
                 return false;
             }
