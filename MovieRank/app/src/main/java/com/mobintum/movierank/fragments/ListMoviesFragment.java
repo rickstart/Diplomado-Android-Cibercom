@@ -1,16 +1,22 @@
 package com.mobintum.movierank.fragments;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.mobintum.movierank.R;
 import com.mobintum.movierank.adapters.ListMovieAdapter;
@@ -30,30 +36,16 @@ import java.util.ArrayList;
 public class ListMoviesFragment extends Fragment {
 
     public static final String API_KEY = "35hg37n2zaybbwf7wncj9vgw";
-    private String query ="friends";
     private ArrayList<Movie> movies = new ArrayList<Movie>();
     private ListMovieAdapter adapter;
     private OnFragmentInteractionListener mListener;
+    private final String URL= "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey="+API_KEY+"&q=";
 
-    Uri.Builder builder = new Uri.Builder();
-
+    String url;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        builder.scheme("http")
-                .authority("api.rottentomatoes.com")
-                .appendPath("api")
-                .appendPath("public")
-                .appendPath("v1.0")
-                .appendPath("movies.json")
-                .appendQueryParameter("apikey",API_KEY)
-                .appendQueryParameter("q",query);
-
-        String url = builder.build().toString();
-
-        Log.e("URL", url);
-        new RottenRequest().execute(url);
-
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -96,6 +88,30 @@ public class ListMoviesFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_list_movies,menu);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menuSearch).getActionView();
+        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getActivity().getComponentName());
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+
+                new RottenRequest().execute(URLX+query);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+    }
 
     public interface OnFragmentInteractionListener {
 
