@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mobintum.movierank.R;
+import com.mobintum.movierank.fragments.DetailMovieFragment;
 import com.mobintum.movierank.fragments.ListMoviesFragment;
 import com.mobintum.movierank.fragments.NavigationDrawerFragment;
 import com.mobintum.movierank.models.Movie;
@@ -31,12 +32,14 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fragmentManager = getSupportFragmentManager();
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -109,6 +112,12 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onMovieSelected(Movie movie) {
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.container, DetailMovieFragment.newInstance(movie))
+                .commit();
+
+
 
     }
 
