@@ -10,7 +10,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.mobintum.movierank.R;
+import com.mobintum.movierank.models.Cast;
 import com.mobintum.movierank.models.Movie;
+import com.mobintum.movierank.models.Raiting;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 
 public class DetailMovieFragment extends Fragment {
@@ -49,6 +54,24 @@ public class DetailMovieFragment extends Fragment {
         TextView txtSynopsis = (TextView) view.findViewById(R.id.txtSynopsis);
         RatingBar ratingCritic = (RatingBar) view.findViewById(R.id.ratingCritic);
         RatingBar ratingAudience = (RatingBar) view.findViewById(R.id.ratingAudience);
+
+        Picasso.with(getActivity()).load(movie.getPosterUrl()).into(imgPoster);
+        txtTitleDetail.setText(movie.getTitle());
+        txtRuntime.setText(movie.getRuntime()+" min");
+        ArrayList<Cast> casting = movie.getCasting();
+        for (int i=0; i<casting.size();i++){
+            if(i==0)
+                txtCasting.setText(casting.get(i).getName());
+            else
+                txtCasting.append(" ,"+casting.get(i).getName());
+        }
+        txtSynopsis.setText(movie.getSynopsis());
+
+        Raiting rating = movie.getRaiting();
+        double score =  rating.getAudienceScore()*0.01*5;
+        ratingAudience.setRating((float)score);
+        score =  rating.getCriticScore()*0.01*5;
+        ratingCritic.setRating((float)score);
 
 
         return view;
