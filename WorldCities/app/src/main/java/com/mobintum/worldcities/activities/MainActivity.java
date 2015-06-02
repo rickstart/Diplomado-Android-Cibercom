@@ -1,19 +1,28 @@
 package com.mobintum.worldcities.activities;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mobintum.worldcities.R;
+import com.mobintum.worldcities.fragments.ListCitiesFragment;
+import com.mobintum.worldcities.models.City;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements ListCitiesFragment.OnFragmentInteractionListener{
 
+    private FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, new ListCitiesFragment())
+                .commit();
     }
 
 
@@ -37,5 +46,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCitySelected(City city) {
+
     }
 }

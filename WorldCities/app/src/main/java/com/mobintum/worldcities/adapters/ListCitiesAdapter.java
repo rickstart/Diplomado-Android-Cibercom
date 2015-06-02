@@ -38,7 +38,7 @@ public class ListCitiesAdapter extends ArrayAdapter {
 
         if(convertView==null){
             holder = new ViewHolder();
-            inflater.inflate(resource,parent,false);
+            convertView = inflater.inflate(resource,parent,false);
             holder.text1 = (TextView) convertView.findViewById(android.R.id.text1);
             convertView.setTag(holder);
         } else {
