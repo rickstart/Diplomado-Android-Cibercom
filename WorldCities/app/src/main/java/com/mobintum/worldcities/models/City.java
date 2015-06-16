@@ -1,11 +1,12 @@
 package com.mobintum.worldcities.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Rick on 01/06/15.
  */
-public class City {
+public class City implements Serializable{
 
     private String name;
     private double latitude;

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mobintum.worldcities.R;
+import com.mobintum.worldcities.fragments.CityFragment;
 import com.mobintum.worldcities.fragments.ListCitiesFragment;
 import com.mobintum.worldcities.models.City;
 
@@ -50,6 +51,10 @@ public class MainActivity extends ActionBarActivity implements ListCitiesFragmen
 
     @Override
     public void onCitySelected(City city) {
+
+        getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                .replace(R.id.container, CityFragment.newInstance(city))
+                .commit();
 
     }
 }
