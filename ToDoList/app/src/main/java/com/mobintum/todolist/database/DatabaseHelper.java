@@ -39,9 +39,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "    priority integer NOT NULL," +
                 "    description text," +
                 "    fk_statusId integer NOT NULL," +
-                "    termLimit datetime NOT NULL," +
-                "    createdAt datetime NOT NULL," +
-                "    updatedAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "    termLimit datetime," +
+                "    createdAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "    updatedAt datetime," +
                 "    FOREIGN KEY (fk_statusId) REFERENCES Status (statusId)" +
                 ");");
     }
