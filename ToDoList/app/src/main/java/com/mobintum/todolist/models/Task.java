@@ -114,11 +114,7 @@ public class Task {
         cv.put(FK_STATUS_ID, task.getFkStatusId());
         if (task.getTermLimit() != null)
             cv.put(TERM_LIMIT, dateFormat.format(task.getTermLimit()));
-
         return DatabaseAdapter.getDB(context).insert(TABLE_NAME, null, cv);
-
-
-
     }
 
 }

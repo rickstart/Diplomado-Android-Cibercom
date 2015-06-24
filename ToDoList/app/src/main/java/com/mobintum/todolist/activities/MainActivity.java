@@ -1,19 +1,32 @@
 package com.mobintum.todolist.activities;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mobintum.todolist.R;
+import com.mobintum.todolist.fragments.AddTaskFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+    implements AddTaskFragment.OnFragmentInteractionListener{
+
+    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fm = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
+        fm.beginTransaction().addToBackStack(null)
+                .replace(R.id.container, new AddTaskFragment())
+                .commit();
+
+
+
+
     }
 
 
@@ -37,5 +50,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateTask() {
+
     }
 }
