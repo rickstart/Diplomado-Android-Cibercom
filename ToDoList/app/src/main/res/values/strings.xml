@@ -11,4 +11,13 @@
     <string name="term_limit">Term Limit</string>
     <string name="set_date">Set Date</string>
     <string name="set_time">Set Time</string>
+
+
+
+    <array name="priority_array">
+
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </array>
 </resources>

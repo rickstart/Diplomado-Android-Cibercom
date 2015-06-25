@@ -43,28 +43,51 @@
             android:paddingTop="@dimen/padding_big"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinPriority"/>
+            android:id="@+id/spinnerPriority"/>
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/term_limit"
-            android:textSize="@dimen/font_title"
-            android:paddingTop="@dimen/padding_big"/>
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/switchTerm"/>
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:layout_width="@dimen/img_button"
-            android:layout_height="@dimen/img_button"
-            android:scaleType="fitCenter"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:src="@mipmap/ic_datetime"
-            android:id="@+id/btnDateTime"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/term_limit"
+                android:textSize="@dimen/font_title"
+                android:paddingRight="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_big"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchTerm"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:id="@+id/linearDateTime">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_medium"
+                android:paddingRight="@dimen/padding_big"
+                android:id="@+id/txtDateTime"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_menu_edit"
+                android:id="@+id/btnDateTime"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>
