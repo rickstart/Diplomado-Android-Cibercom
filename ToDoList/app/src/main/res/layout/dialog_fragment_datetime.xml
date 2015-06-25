@@ -1,41 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"        >
-
-        <Button
-            android:layout_width="0dp"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/set_date"
-            android:layout_weight="1"
+            android:orientation="horizontal"        >
 
-            android:id="@+id/btnSetDate"/>
-        <Button
-            android:layout_width="0dp"
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/set_date"
+                android:layout_weight="1"
+
+                android:id="@+id/btnSetDate"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/set_time"
+                android:layout_weight="1"
+                android:id="@+id/btnSetTime"/>
+        </LinearLayout>
+
+        <DatePicker
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/set_time"
-            android:layout_weight="1"
-            android:id="@+id/btnSetTime"/>
+            android:layout_gravity="center"
+            android:padding="@dimen/padding_medium"
+            android:id="@+id/dateDialog"/>
+        <TimePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:padding="@dimen/padding_medium"
+            android:id="@+id/timeDialog"/>
+
+
+
     </LinearLayout>
 
-    <DatePicker
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:padding="@dimen/padding_medium"
-        android:id="@+id/dateDialog"/>
-    <TimePicker
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:padding="@dimen/padding_medium"
-        android:id="@+id/timeDialog"/>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="@dimen/font_medium"
+            android:background="@android:color/transparent"
+            android:id="@+id/btnCancel"/>
 
-</LinearLayout>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="@string/ok"
+            android:textSize="@dimen/font_medium"
+            android:textColor="@android:color/holo_blue_light"
+            android:background="@android:color/transparent"
+            android:id="@+id/btnOk"/>
+    </LinearLayout>
+</RelativeLayout>
