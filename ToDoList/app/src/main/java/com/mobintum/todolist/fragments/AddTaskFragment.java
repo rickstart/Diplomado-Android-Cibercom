@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -21,12 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobintum.todolist.R;
+import com.mobintum.todolist.models.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
-public class AddTaskFragment extends Fragment {
+public class AddTaskFragment extends Fragment implements DateTimePickerFragment.OnDialogFragmentInteractionListener{
 
 
     private OnFragmentInteractionListener mListener;
@@ -35,11 +38,14 @@ public class AddTaskFragment extends Fragment {
     private boolean checked = false;
     private LinearLayout linearDateTime;
     private Spinner spinnerPriority;
+    private EditText etTitle, etDescription;
+    private SimpleDateFormat dateFormat;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
     @Override
@@ -52,6 +58,9 @@ public class AddTaskFragment extends Fragment {
         txtDateTime = (TextView) view.findViewById(R.id.txtDateTime);
         linearDateTime = (LinearLayout) view.findViewById(R.id.linearDateTime);
         spinnerPriority = (Spinner) view.findViewById(R.id.spinnerPriority);
+        etTitle = (EditText) view.findViewById(R.id.etTitle);
+        etDescription = (EditText) view.findViewById(R.id.etDescription);
+
         ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.item_priority_spinner,getActivity().getResources().getStringArray(R.array.priority_array));
         spinnerPriority.setAdapter(adapter);
 
@@ -63,8 +72,7 @@ public class AddTaskFragment extends Fragment {
                 if( isChecked ){
 
                     linearDateTime.setVisibility(View.VISIBLE);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
-
+                    dateFormat = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
                     txtDateTime.setText(dateFormat.format(Calendar.getInstance().getTime()));
                 }else{
                     txtDateTime.setText("");
@@ -75,8 +83,9 @@ public class AddTaskFragment extends Fragment {
         btnDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new DateTimePickerFragment();
-                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+                DialogFragment dialogFragment = new DateTimePickerFragment();
+                dialogFragment.setTargetFragment(AddTaskFragment.this, 0);
+                dialogFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
             }
         });
 
@@ -102,23 +111,62 @@ public class AddTaskFragment extends Fragment {
         menu.clear();
         inflater.inflate(R.menu.menu_add_task,menu);
 
-        MenuItem item = menu.findItem(R.id.menu_save);
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        MenuItem menuSave = menu.findItem(R.id.menu_save);
+        menuSave.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(getActivity(),"TEST",Toast.LENGTH_SHORT).show();
+                if(validateInput(etTitle) && validateInput(etDescription)) {
+                    if( spinnerPriority.getSelectedItemPosition() == 0 )
+                        Toast.makeText(getActivity(), "Select Priority", Toast.LENGTH_SHORT).show();
+                    else{
 
+                        Date date =  null;
+                        if(switchTerm.isChecked()) {
+                            try {
+                                date = dateFormat.parse(txtDateTime.getText().toString());
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        Task task = new Task(etTitle.getText().toString(),spinnerPriority.getSelectedItemPosition(),
+                                etDescription.getText().toString(),1, date );
+
+                        Task.insert(getActivity(),task);
+                    }
+                }
+                return false;
+            }
+        });
+
+        MenuItem menuDiscard = menu.findItem(R.id.menu_discard);
+        menuDiscard.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                getActivity().getSupportFragmentManager().popBackStack();
                 return false;
             }
         });
     }
 
-
-
+    public boolean validateInput(EditText editText){
+        if(editText.getText().toString().trim().length() == 0) {
+            editText.setError("Empty");
+            return false;
+        }else {
+            return true;
+        }
+    }
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onFinishedDialogFragment(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        txtDateTime.setText(dateFormat.format(date));
     }
 
 

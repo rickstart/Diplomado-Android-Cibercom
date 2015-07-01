@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            />
+            android:id="@+id/etTitle"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -36,13 +36,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:paddingBottom="@dimen/padding_medium"/>
+            android:paddingBottom="@dimen/padding_medium"
+            android:id="@+id/etDescription"/>
 
 
         <Spinner
             android:paddingTop="@dimen/padding_big"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:prompt="@string/priority"
             android:id="@+id/spinnerPriority"/>
 
 

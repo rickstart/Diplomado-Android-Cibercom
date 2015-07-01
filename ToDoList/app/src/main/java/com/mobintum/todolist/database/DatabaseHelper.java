@@ -44,6 +44,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "    updatedAt datetime," +
                 "    FOREIGN KEY (fk_statusId) REFERENCES Status (statusId)" +
                 ");");
+
+        db.execSQL("INSERT INTO Status (statusId, status) VALUES (1, 'in progress');");
+        db.execSQL("INSERT INTO Status (statusId, status) VALUES (2, 'complete');");
     }
 
     @Override
