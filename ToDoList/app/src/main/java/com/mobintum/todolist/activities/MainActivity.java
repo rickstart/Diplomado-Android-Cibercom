@@ -10,10 +10,13 @@ import android.view.MenuItem;
 import com.mobintum.todolist.R;
 import com.mobintum.todolist.database.AndroidDatabaseManager;
 import com.mobintum.todolist.fragments.AddTaskFragment;
+import com.mobintum.todolist.fragments.ListTasksFragment;
+import com.mobintum.todolist.models.Task;
 
 
 public class MainActivity extends ActionBarActivity
-    implements AddTaskFragment.OnFragmentInteractionListener{
+    implements AddTaskFragment.OnFragmentInteractionListener,
+                ListTasksFragment.OnFragmentInteractionListener{
 
     private FragmentManager fm;
 
@@ -22,6 +25,8 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         fm = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
+
+        fm.beginTransaction().replace(R.id.container, new ListTasksFragment()).commit();
 
 
 
@@ -76,6 +81,11 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onCreateTask() {
+
+    }
+
+    @Override
+    public void onTaskSelected(Task Task) {
 
     }
 }

@@ -9,4 +9,6 @@
     <dimen name="font_title">35sp</dimen>
     <dimen name="padding_big">50dp</dimen>
     <dimen name="img_button">100dp</dimen>
+    <dimen name="priority_bar">10dp</dimen>
+    <dimen name="btn_info">30dp</dimen>
 </resources>

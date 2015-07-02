@@ -7,7 +7,6 @@ import android.database.Cursor;
 import com.mobintum.todolist.database.DatabaseAdapter;
 import com.mobintum.todolist.util.DateUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -121,13 +120,13 @@ public class Task {
     public static long insert(Context context, Task task){
 
         ContentValues cv = new ContentValues();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         cv.put(TITLE, task.getTitle());
         cv.put(PRIORITY, task.getPriority());
         cv.put(DESCRIPTION, task.description);
         cv.put(FK_STATUS_ID, task.getFkStatusId());
         if (task.getTermLimit() != null)
-            cv.put(TERM_LIMIT, dateFormat.format(task.getTermLimit()));
+            cv.put(TERM_LIMIT, DateUtil.DATE_FORMAT.format(task.getTermLimit()));
         return DatabaseAdapter.getDB(context).insert(TABLE_NAME, null, cv);
     }
 
