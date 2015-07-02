@@ -2,10 +2,13 @@ package com.mobintum.todolist.models;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import com.mobintum.todolist.database.DatabaseAdapter;
+import com.mobintum.todolist.util.DateUtil;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -38,6 +41,17 @@ public class Task {
         this.description = description;
         this.fkStatusId = fkStatusId;
         this.termLimit = termLimit;
+    }
+
+    public Task(int taskId, String title, int priority, String description, int fkStatusId, Date termLimit, Date createAt, Date updatedAt) {
+        this.taskId = taskId;
+        this.title = title;
+        this.priority = priority;
+        this.description = description;
+        this.fkStatusId = fkStatusId;
+        this.termLimit = termLimit;
+        this.createAt = createAt;
+        this.updatedAt = updatedAt;
     }
 
     public int getTaskId() {
@@ -117,4 +131,40 @@ public class Task {
         return DatabaseAdapter.getDB(context).insert(TABLE_NAME, null, cv);
     }
 
+    public static ArrayList<Task> getTask(Context context){
+
+        ArrayList<Task> tasks = new ArrayList<Task>();
+
+        try{
+
+            Cursor cursor = DatabaseAdapter.getDB(context).query(TABLE_NAME,null,null,null,null,null,null);
+            if(cursor != null){
+                for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+
+                    int taskId = cursor.getInt(cursor.getColumnIndexOrThrow(TASK_ID));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow(TITLE));
+                    int priority = cursor.getInt(cursor.getColumnIndexOrThrow(PRIORITY));
+                    String description = cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION));;
+                    int fkStatusId = cursor.getInt(cursor.getColumnIndexOrThrow(FK_STATUS_ID));
+
+                    String sTermLimit = cursor.getString(cursor.getColumnIndexOrThrow(TERM_LIMIT));
+                    Date termLimit = (sTermLimit != null) ? DateUtil.DATE_FORMAT.parse(sTermLimit) : null;
+
+                    String sCreateAt = cursor.getString(cursor.getColumnIndexOrThrow(CREATED_AT));
+                    Date createAt = (sCreateAt != null) ? DateUtil.DATE_FORMAT.parse(sCreateAt) : null;;
+
+                    String sUpdatedAt = cursor.getString(cursor.getColumnIndexOrThrow(UPDATED_AT));
+                    Date updatedAt = (sUpdatedAt != null) ? DateUtil.DATE_FORMAT.parse(sUpdatedAt) : null;;;
+
+                    tasks.add(new Task(taskId, title, priority, description, fkStatusId, termLimit, createAt, updatedAt));
+
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tasks;
+    }
 }

@@ -133,6 +133,7 @@ public class AddTaskFragment extends Fragment implements DateTimePickerFragment.
                                 etDescription.getText().toString(),1, date );
 
                         Task.insert(getActivity(),task);
+                        getActivity().getSupportFragmentManager().popBackStack();
                     }
                 }
                 return false;
