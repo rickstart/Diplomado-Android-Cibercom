@@ -11,4 +11,7 @@
     <dimen name="img_button">100dp</dimen>
     <dimen name="priority_bar">10dp</dimen>
     <dimen name="btn_info">30dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_press_elevation">4dp</dimen>
 </resources>

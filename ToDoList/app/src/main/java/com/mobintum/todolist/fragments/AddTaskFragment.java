@@ -46,6 +46,9 @@ public class AddTaskFragment extends Fragment implements DateTimePickerFragment.
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //Outline
+
+
     }
 
     @Override
@@ -60,6 +63,7 @@ public class AddTaskFragment extends Fragment implements DateTimePickerFragment.
         spinnerPriority = (Spinner) view.findViewById(R.id.spinnerPriority);
         etTitle = (EditText) view.findViewById(R.id.etTitle);
         etDescription = (EditText) view.findViewById(R.id.etDescription);
+
 
         ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.item_priority_spinner,getActivity().getResources().getStringArray(R.array.priority_array));
         spinnerPriority.setAdapter(adapter);

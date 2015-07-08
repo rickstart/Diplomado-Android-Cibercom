@@ -35,7 +35,7 @@
 
     </LinearLayout>
     
-    <ImageButton
+  <!--  <ImageButton
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
@@ -44,6 +44,6 @@
         android:src="@android:drawable/ic_dialog_info"
         android:background="@android:color/transparent"
         android:layout_alignParentRight="true"
-        android:id="@+id/btnInfo"/>
+        android:id="@+id/btnInfo"/>-->
 
 </LinearLayout>

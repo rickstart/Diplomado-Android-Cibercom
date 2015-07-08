@@ -2,7 +2,18 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+
+        <item name="android:textColorPrimary">#212121</item>
+        <item name="android:textColorSecondary">#727272</item>
+        <!-- customize the color palette -->
+        <item name="colorPrimary">@color/material_primary</item>
+        <item name="colorPrimaryDark">@color/material_dark_primary</item>
+        <item name="colorAccent">@color/material_accent</item>
+
+
     </style>
+
+    <!-- ActionBar styles -->
+
 
 </resources>

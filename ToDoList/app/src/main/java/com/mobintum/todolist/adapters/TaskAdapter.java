@@ -45,7 +45,7 @@ public class TaskAdapter extends ArrayAdapter {
             holder.layoutPriority = (FrameLayout) convertView.findViewById(R.id.layoutPriority);
             holder.txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);
             holder.txtCreateAt = (TextView) convertView.findViewById(R.id.txtCreateAt);
-            holder.btnInfo = (ImageButton) convertView.findViewById(R.id.btnInfo);
+            //holder.btnInfo = (ImageButton) convertView.findViewById(R.id.btnInfo);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
